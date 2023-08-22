@@ -1,7 +1,7 @@
 {
-  "name": "whatsapp-clone",
+  "name": "web",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/whatsapp-clone",
+  "sourceRoot": "apps/web",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,11 +9,11 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/whatsapp-clone"
+        "outputPath": "dist/apps/web"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/whatsapp-clone"
+          "outputPath": "apps/web"
         },
         "production": {}
       }
@@ -22,16 +22,17 @@
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "whatsapp-clone:build",
-        "dev": true
+        "buildTarget": "web:build",
+        "dev": true,
+        "proxyConfig": "apps/web/proxy.conf.json"
       },
       "configurations": {
         "development": {
-          "buildTarget": "whatsapp-clone:build:development",
+          "buildTarget": "web:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "whatsapp-clone:build:production",
+          "buildTarget": "web:build:production",
           "dev": false
         }
       }
@@ -39,14 +40,14 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "whatsapp-clone:build:production"
+        "buildTarget": "web:build:production"
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/whatsapp-clone/jest.config.ts",
+        "jestConfig": "apps/web/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -60,7 +61,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/whatsapp-clone/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/web/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
